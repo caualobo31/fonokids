@@ -7,8 +7,11 @@
     <meta name="description" content="Kit com +110 dinâmicas terapêuticas prontas para fonoaudiólogas que atendem crianças. Organizadas por situação de sessão. Imprima e use hoje.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://cdn.utmify.com.br">
+    <link rel="preload" as="image" type="image/webp" href="img/mockup.webp" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <style>
         :root {
             --primary:      #6C5CE7;
@@ -627,7 +630,10 @@
             <p class="hero-sub">Transforme sessões travadas em terapias leves e produtivas.</p>
 
             <!-- imagem abaixo da subheadline -->
-            <img src="img/mockuop FK sem fundo.png" class="hero-img" alt="FonoKids — Kit de Dinâmicas Terapêuticas">
+            <picture>
+                <source srcset="img/mockup.webp" type="image/webp">
+                <img src="img/mockuop FK sem fundo.png" class="hero-img" alt="FonoKids — Kit de Dinâmicas Terapêuticas" fetchpriority="high" width="520" height="347">
+            </picture>
 
             <div class="hero-cta-wrap">
                 <a href="#oferta" class="cta-primary">QUERO MEU KIT FONOKIDS →</a>
@@ -676,7 +682,10 @@
             <p class="produto-sub">+110 dinâmicas terapêuticas organizadas por <strong>situação de sessão</strong> — não por área clínica.</p>
 
             <!-- mockup abaixo da subheadline -->
-            <img src="img/mockuop FK sem fundo.png" class="produto-mock" alt="FonoKids — Kit de Dinâmicas">
+            <picture>
+                <source srcset="img/mockup.webp" type="image/webp">
+                <img src="img/mockuop FK sem fundo.png" class="produto-mock" alt="FonoKids — Kit de Dinâmicas" loading="lazy" width="480" height="320">
+            </picture>
 
             <ul class="bullets">
                 <li><i data-lucide="check-circle" class="icon icon-success"></i><span><strong>Criança travou?</strong> Tem dinâmica pra isso.</span></li>
@@ -842,7 +851,10 @@
             <div class="plan-card plan-basic-card fade">
                 <div class="plan-name">Plano Básico</div>
                 <!-- imagem do produto -->
-                <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Básico">
+                <picture>
+                    <source srcset="img/mockup.webp" type="image/webp">
+                    <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Básico" loading="lazy" width="380" height="253">
+                </picture>
                 <div class="plan-receives-label">Você recebe:</div>
                 <ul class="plan-includes">
                     <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +110 Dinâmicas por situação de sessão</li>
@@ -876,7 +888,10 @@
                 </div>
                 <div class="plan-name">Plano Premium</div>
                 <!-- imagem da hero -->
-                <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Premium — Kit Completo">
+                <picture>
+                    <source srcset="img/mockup.webp" type="image/webp">
+                    <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Premium — Kit Completo" loading="lazy" width="380" height="253">
+                </picture>
                 <div class="plan-receives-label">Você recebe:</div>
                 <ul class="plan-includes">
                     <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +220 Dinâmicas por situação de sessão</li>
@@ -1021,7 +1036,7 @@
 </footer>
 
 <script>
-    lucide.createIcons();
+    document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
 
     function toggleFaq(item) {
         const isActive = item.classList.contains('active');
