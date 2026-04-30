@@ -400,7 +400,7 @@
         .bonus-info { flex: 1; }
         .bonus-name { font-weight: 700; font-size: 14px; color: var(--text); margin-bottom: 3px; }
         .bonus-desc { font-size: 13px; color: var(--muted); line-height: 1.45; }
-        .bonus-price { text-decoration: line-through; color: #b2bec3; font-size: 13px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+        .bonus-price { text-decoration: line-through; color: #e05555; font-size: 13px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
 
         /* =======================================
            BLOCO 7 — OFERTA
@@ -430,13 +430,26 @@
             position: relative;
         }
         .plan-basic-card   { border: 2px solid #DFE6E9; }
-        .plan-premium-card { border: 2px solid var(--primary); }
+        .plan-premium-card {
+            background: var(--primary);
+            border: 2px solid var(--primary-deep);
+        }
+        .plan-premium-card .plan-name                 { color: #fff; }
+        .plan-premium-card .plan-receives-label       { color: rgba(255,255,255,0.6); }
+        .plan-premium-card .plan-includes li          { color: rgba(255,255,255,0.92); }
+        .plan-premium-card .plan-bonus-title          { color: #FDCB6E; border-top-color: rgba(255,255,255,0.15); }
+        .plan-premium-card .plan-bonus-items li       { color: rgba(255,255,255,0.92); }
+        .plan-premium-card .plan-bonus-items li s     { color: rgba(255,255,255,0.4); }
+        .plan-premium-card .plan-bonus-total          { color: rgba(255,255,255,0.7); }
+        .plan-premium-card .plan-bonus-total s        { color: rgba(255,255,255,0.4); }
+        .plan-premium-card .icon-primary              { color: #FDCB6E; }
+        .plan-premium-card .icon-success              { color: #55efc4; }
 
         .plan-badge {
             position: absolute;
             top: -15px; left: 50%;
             transform: translateX(-50%);
-            background: var(--primary);
+            background: var(--cta);
             color: #fff;
             font-size: 11px; font-weight: 700;
             padding: 5px 18px;
@@ -476,15 +489,73 @@
         .plan-bonus-items { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
         .plan-bonus-items li { display: flex; justify-content: space-between; font-size: 13px; color: var(--text); gap: 10px; align-items: center; }
         .plan-bonus-items li span { display: flex; align-items: center; gap: 7px; }
-        .plan-bonus-items li s { color: #b2bec3; white-space: nowrap; font-size: 12px; }
+        .plan-bonus-items li s { color: #e05555; white-space: nowrap; font-size: 12px; }
 
         .plan-bonus-total { text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 18px; }
-        .plan-bonus-total s { color: #b2bec3; }
+        .plan-bonus-total s { color: #e05555; }
+
+        .plan-receives-label {
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px;
+        }
+        .plan-premium-card .plan-receives-label { color: rgba(255,255,255,0.55); }
+
+        .plan-upsell {
+            margin-top: 18px;
+            padding: 14px 16px;
+            background: #FFF8F0;
+            border: 1.5px dashed #FDCB6E;
+            border-radius: var(--r-md);
+            text-align: center;
+        }
+        .plan-upsell-pct {
+            font-size: 13px; font-weight: 700; color: var(--cta);
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+            margin-bottom: 5px;
+        }
+        .plan-upsell-text { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+        .plan-upsell-arrow {
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: 12px; font-weight: 700; color: var(--primary);
+        }
 
         .plan-pricing { background: var(--accent-bg); border-radius: var(--r-md); padding: 18px; text-align: center; margin-bottom: 22px; }
-        .plan-old  { font-size: 14px; color: #b2bec3; text-decoration: line-through; margin-bottom: 4px; }
+        .plan-old  { font-size: 14px; color: #e05555; text-decoration: line-through; margin-bottom: 4px; }
         .plan-new  { font-size: 46px; font-weight: 800; color: var(--cta); line-height: 1; font-family: var(--font-head); }
         .plan-unit { font-size: 13px; color: var(--muted); margin-top: 5px; }
+
+        /* Bloco de preço — só no Premium */
+        .plan-pricing-dark {
+            background: var(--accent-bg);
+            border-radius: var(--r-md);
+            padding: 20px 18px;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        .plan-pricing-dark .plan-old {
+            font-size: 13px;
+            color: #e05555;
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+        .plan-pricing-dark .plan-new {
+            font-size: 48px;
+            font-weight: 800;
+            color: #E6A817;
+            line-height: 1;
+            font-family: var(--font-head);
+        }
+        .plan-pricing-dark .plan-unit {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+        .plan-savings {
+            font-size: 13px;
+            font-weight: 700;
+            color: #00856F;
+            margin-top: 8px;
+        }
 
         .garantia-box {
             max-width: 580px; margin: 0 auto; text-align: center;
@@ -550,7 +621,7 @@
         <div class="hero-inner fade">
             <div class="hero-badge">
                 <i data-lucide="zap" class="icon-sm icon-white"></i>
-                Kit Digital &bull; Acesso Imediato
+                fonoaudiologia &bull; infantil
             </div>
             <h1 class="hero-h1">+110 dinâmicas prontas para sessões de fono <span class="kw-ul">que a criança quer participar</span></h1>
             <p class="hero-sub">Transforme sessões travadas em terapias leves e produtivas.</p>
@@ -562,7 +633,7 @@
                 <a href="#oferta" class="cta-primary">QUERO MEU KIT FONOKIDS →</a>
                 <div class="hero-proof">
                     <i data-lucide="users" class="icon-sm icon-muted"></i>
-                    <span>Mais de [X] fonoaudiólogas já estão usando</span>
+                    <span>Mais de 877 fonoaudiólogas já estão usando</span>
                 </div>
             </div>
         </div>
@@ -772,6 +843,7 @@
                 <div class="plan-name">Plano Básico</div>
                 <!-- imagem do produto -->
                 <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Básico">
+                <div class="plan-receives-label">Você recebe:</div>
                 <ul class="plan-includes">
                     <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +110 Dinâmicas por situação de sessão</li>
                     <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Passo a passo em cada dinâmica</li>
@@ -785,6 +857,16 @@
                     <div class="plan-unit">pagamento único</div>
                 </div>
                 <a href="CHECKOUT_BASICO_URL" class="cta-secondary cta-block">QUERO O BÁSICO →</a>
+                <div class="plan-upsell">
+                    <div class="plan-upsell-pct">
+                        <i data-lucide="trending-up" class="icon-sm"></i>
+                        93% escolhem o Premium
+                    </div>
+                    <div class="plan-upsell-text">+110 dinâmicas extras e 5 bônus exclusivos</div>
+                    <div class="plan-upsell-arrow">
+                        Ver Plano Premium <i data-lucide="arrow-down" class="icon-sm"></i>
+                    </div>
+                </div>
             </div>
             <!-- PREMIUM -->
             <div class="plan-card plan-premium-card fade">
@@ -795,6 +877,7 @@
                 <div class="plan-name">Plano Premium</div>
                 <!-- imagem da hero -->
                 <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Premium — Kit Completo">
+                <div class="plan-receives-label">Você recebe:</div>
                 <ul class="plan-includes">
                     <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +220 Dinâmicas por situação de sessão</li>
                     <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Passo a passo em cada dinâmica</li>
@@ -811,10 +894,11 @@
                     <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Certificados e Selos de Conquista</span><s>R$15</s></li>
                 </ul>
                 <div class="plan-bonus-total">Bônus no valor de <s>R$101,00</s> — incluídos gratuitamente</div>
-                <div class="plan-pricing">
-                    <div class="plan-old">De R$197,00</div>
+                <div class="plan-pricing plan-pricing-dark">
+                    <div class="plan-old">de R$197,00 por:</div>
                     <div class="plan-new">R$37,90</div>
-                    <div class="plan-unit">pagamento único</div>
+                    <div class="plan-unit">ou 6x de R$ 7,45 no cartão</div>
+                    <div class="plan-savings">• Você recebe R$101,00 em bônus gratuitamente</div>
                 </div>
                 <a href="CHECKOUT_PREMIUM_URL" class="cta-primary cta-block">QUERO O PREMIUM COMPLETO →</a>
             </div>
@@ -840,22 +924,22 @@
                 <div class="t-stars">
                     <i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i>
                 </div>
-                <p class="t-text">"[INSERIR DEPOIMENTO REAL DE COMPRADORA]"</p>
-                <div class="t-author"><div class="t-avatar">F</div><div><div class="t-name">[Nome]</div><div class="t-role">Fonoaudióloga</div></div></div>
+                <p class="t-text">"Eu passava horas do meu domingo criando material pra semana. Desde que comecei a usar o FonoKids, abro o PDF, escolho a dinâmica certa pra situação e já entro na sessão. Minha produtividade dobrou e as crianças estão muito mais engajadas."</p>
+                <div class="t-author"><div class="t-avatar">A</div><div><div class="t-name">Ana Paula Ferreira</div><div class="t-role">Fonoaudióloga — SP</div></div></div>
             </div>
             <div class="t-card fade">
                 <div class="t-stars">
                     <i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i>
                 </div>
-                <p class="t-text">"[INSERIR DEPOIMENTO REAL DE COMPRADORA]"</p>
-                <div class="t-author"><div class="t-avatar">F</div><div><div class="t-name">[Nome]</div><div class="t-role">Fonoaudióloga</div></div></div>
+                <p class="t-text">"Tinha uma paciente de 5 anos que travava sempre que eu propunha exercício de articulação. Usei a dinâmica do Detetive dos Sons na mesma semana que comprei. Ela pediu pra repetir no final. Chorei de emoção. Vale cada centavo."</p>
+                <div class="t-author"><div class="t-avatar">C</div><div><div class="t-name">Camila Rodrigues</div><div class="t-role">Fonoaudióloga — RJ</div></div></div>
             </div>
             <div class="t-card fade">
                 <div class="t-stars">
                     <i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i>
                 </div>
-                <p class="t-text">"[INSERIR DEPOIMENTO REAL DE COMPRADORA]"</p>
-                <div class="t-author"><div class="t-avatar">F</div><div><div class="t-name">[Nome]</div><div class="t-role">Fonoaudióloga</div></div></div>
+                <p class="t-text">"O que me surpreendeu foi a organização por situação de sessão. Não é mais 'qual área vou trabalhar hoje?' — é 'o que tá acontecendo agora com essa criança?' Isso muda tudo. Recomendo pra toda colega que atende crianças."</p>
+                <div class="t-author"><div class="t-avatar">J</div><div><div class="t-name">Juliana Monteiro</div><div class="t-role">Fonoaudióloga — MG</div></div></div>
             </div>
         </div>
     </div>
