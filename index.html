@@ -468,8 +468,16 @@
             font-size: 22px;
             color: var(--text);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 6px;
         }
+        .plan-sub {
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .plan-premium-card .plan-sub { color: rgba(255,255,255,0.75); }
 
         /* image inside plan card */
         .plan-img {
@@ -881,12 +889,13 @@
                 </div>
             </div>
             <!-- PREMIUM -->
-            <div class="plan-card plan-premium-card fade">
+            <div class="plan-card plan-premium-card">
                 <div class="plan-badge">
                     <i data-lucide="award" class="icon-sm icon-white"></i>
                     MAIS ESCOLHIDO
                 </div>
                 <div class="plan-name">Plano Premium</div>
+                <p class="plan-sub">Tudo que você precisa para nunca mais improvisar uma sessão.</p>
                 <!-- imagem da hero -->
                 <picture>
                     <source srcset="img/mockup.webp" type="image/webp">
