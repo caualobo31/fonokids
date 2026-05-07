@@ -415,156 +415,179 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 24px;
-            max-width: 820px;
+            max-width: 860px;
             margin: 0 auto 44px;
         }
         @media (min-width: 680px) {
             .plans { grid-template-columns: 1fr 1fr; align-items: start; }
-            .plan-premium-card { transform: scale(1.02); }
+            .plan-premium-card { transform: translateY(-12px); }
         }
+        .plan-premium-card { order: -1; }
+        @media (min-width: 680px) { .plan-premium-card { order: 0; } }
 
         .plan-card {
             background: #fff;
-            border-radius: var(--r-lg);
+            border-radius: 22px;
             padding: 36px 28px 32px;
-            box-shadow: var(--shadow-float);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
             position: relative;
         }
-        .plan-basic-card   { border: 2px solid #DFE6E9; }
-        .plan-premium-card {
-            background: var(--primary);
-            border: 2px solid var(--primary-deep);
-        }
-        .plan-premium-card .plan-name                 { color: #fff; }
-        .plan-premium-card .plan-receives-label       { color: rgba(255,255,255,0.6); }
-        .plan-premium-card .plan-includes li          { color: rgba(255,255,255,0.92); }
-        .plan-premium-card .plan-bonus-title          { color: #FFD93D; border-top-color: rgba(255,255,255,0.15); }
-        .plan-premium-card .plan-bonus-items li       { color: rgba(255,255,255,0.92); }
-        .plan-premium-card .plan-bonus-items li s     { color: rgba(255,255,255,0.4); }
-        .plan-premium-card .plan-bonus-total          { color: rgba(255,255,255,0.7); }
-        .plan-premium-card .plan-bonus-total s        { color: rgba(255,255,255,0.4); }
-        .plan-premium-card .icon-primary              { color: #FFD93D; }
-        .plan-premium-card .icon-success              { color: #55efc4; }
+        .plan-basic-card   { border: 1.5px solid #E5E5E5; }
+        .plan-premium-card { background: var(--primary); border: none; box-shadow: 0 16px 56px rgba(108,92,231,0.38); }
 
-        .plan-badge {
-            position: absolute;
-            top: -15px; left: 50%;
-            transform: translateX(-50%);
-            background: var(--cta);
-            color: #fff;
-            font-size: 11px; font-weight: 700;
-            padding: 5px 18px;
-            border-radius: 100px;
-            letter-spacing: 0.07em;
-            white-space: nowrap;
+        /* Badge pill topo do premium */
+        .plan-badge-top {
             display: inline-flex; align-items: center; gap: 6px;
+            background: #FDCB6E; color: #1a1a1a;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 6px 16px; border-radius: 100px; margin-bottom: 18px;
         }
 
-        .plan-name {
-            font-family: var(--font-head);
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--text);
-            text-align: center;
-            margin-bottom: 6px;
+        /* Título do plano */
+        .plan-title {
+            font-family: var(--font-head); font-weight: 700; font-size: 13px;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            text-align: center; color: var(--muted); margin-bottom: 20px;
         }
+        .plan-premium-card .plan-title { color: rgba(255,255,255,0.6); }
+
+        /* Frase de posicionamento */
         .plan-sub {
-            font-size: 13px;
-            color: var(--muted);
-            text-align: center;
-            line-height: 1.5;
-            margin-bottom: 16px;
+            font-size: 16px; font-weight: 700; color: #fff;
+            text-align: center; line-height: 1.4; margin-bottom: 20px;
         }
-        .plan-premium-card .plan-sub { color: rgba(255,255,255,0.75); }
 
-        /* image inside plan card */
+        /* Imagem */
         .plan-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 22px;
+            width: 100%; height: auto; display: block; margin-bottom: 20px;
             filter: drop-shadow(0 12px 28px rgba(108,92,231,0.18)) drop-shadow(0 4px 10px rgba(0,0,0,0.08));
         }
 
-        .plan-includes { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 22px; }
-        .plan-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.45; color: var(--text); }
+        /* Preço — split typography */
+        .plan-price-old {
+            font-size: 13px; color: #e05555; text-decoration: line-through;
+            text-align: center; margin-bottom: 6px;
+        }
+        .plan-premium-card .plan-price-old { color: rgba(255,255,255,0.55); }
 
+        .plan-price-wrap { text-align: center; margin-bottom: 4px; }
+        .plan-price-display {
+            display: inline-flex; align-items: flex-start; gap: 2px; line-height: 1;
+        }
+        .plan-price-currency, .plan-price-cents {
+            font-family: var(--font-head); font-size: 20px; font-weight: 700;
+            color: var(--text); padding-top: 10px;
+        }
+        .plan-price-main {
+            font-family: var(--font-head); font-size: 62px; font-weight: 800;
+            color: var(--text); letter-spacing: -0.03em;
+        }
+        .plan-premium-card .plan-price-currency,
+        .plan-premium-card .plan-price-main,
+        .plan-premium-card .plan-price-cents { color: #FDCB6E; }
+
+        .plan-price-unit {
+            font-size: 12px; color: var(--muted); text-align: center; margin-top: 6px;
+        }
+        .plan-premium-card .plan-price-unit { color: rgba(255,255,255,0.65); }
+
+        .plan-price-installment {
+            font-size: 13px; font-weight: 600; color: var(--text);
+            text-align: center; margin-top: 4px; margin-bottom: 4px;
+        }
+        .plan-premium-card .plan-price-installment { color: rgba(255,255,255,0.85); }
+
+        .plan-price-savings {
+            font-size: 13px; font-weight: 700; color: var(--secondary);
+            text-align: center; margin-bottom: 20px; margin-top: 4px;
+        }
+
+        /* CTAs */
+        .plan-cta-basic {
+            display: block; width: 100%; padding: 16px;
+            background: #B2BEC3; color: #fff;
+            font-family: var(--font-head); font-weight: 700; font-size: 15px;
+            text-align: center; border-radius: 100px; cursor: pointer;
+            transition: background 0.2s; margin-bottom: 24px;
+        }
+        .plan-cta-basic:hover { background: #95A5A6; }
+
+        .plan-cta-premium {
+            display: block; width: 100%; padding: 18px;
+            background: #FDCB6E; color: #1a1a1a;
+            font-family: var(--font-head); font-weight: 700; font-size: 16px;
+            text-align: center; border-radius: 100px; cursor: pointer;
+            box-shadow: 0 4px 18px rgba(253,203,110,0.5);
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 24px;
+        }
+        .plan-cta-premium:hover { background: #f0bc55; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(253,203,110,0.6); }
+
+        /* Lista de itens */
+        .plan-includes { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+        .plan-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.45; color: var(--text); }
+        .plan-premium-card .plan-includes li { color: rgba(255,255,255,0.9); }
+        .plan-premium-card .icon-success { color: #fff; }
+
+        /* Bônus */
         .plan-bonus-title {
             font-size: 11px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 0.09em; color: var(--cta);
-            padding-top: 18px; margin: 18px 0 10px;
-            border-top: 1px solid #F0EFFF;
+            letter-spacing: 0.09em; color: #FDCB6E;
+            padding-top: 16px; margin: 16px 0 10px;
+            border-top: 1px solid rgba(255,255,255,0.15);
         }
-        .plan-bonus-items { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-        .plan-bonus-items li { display: flex; justify-content: space-between; font-size: 13px; color: var(--text); gap: 10px; align-items: center; }
+        .plan-bonus-items { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+        .plan-bonus-items li { display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.9); gap: 10px; align-items: center; }
         .plan-bonus-items li span { display: flex; align-items: center; gap: 7px; }
-        .plan-bonus-items li s { color: #e05555; white-space: nowrap; font-size: 12px; }
+        .plan-bonus-items li s { color: rgba(255,255,255,0.4); white-space: nowrap; font-size: 12px; }
+        .plan-bonus-items .icon-primary { color: #FDCB6E; }
 
-        .plan-bonus-total { text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 18px; }
-        .plan-bonus-total s { color: #e05555; }
+        /* Preço antigo vermelho no premium */
+        .plan-premium-card .plan-price-old { color: #FF8A8A; }
 
+        /* Checks verdes no premium */
+        .plan-premium-card .icon-success { color: #55efc4; }
+
+        /* Barra de meios de pagamento */
+        .plan-payment-bar {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px 20px;
+        }
+        .plan-payment-item {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.75);
+        }
+        .plan-payment-item svg {
+            width: 18px; height: 18px; stroke: rgba(255,255,255,0.75);
+            fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* Label "Você recebe:" */
         .plan-receives-label {
             font-size: 11px; font-weight: 700; text-transform: uppercase;
             letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px;
         }
-        .plan-premium-card .plan-receives-label { color: rgba(255,255,255,0.55); }
+        .plan-premium-card .plan-receives-label { color: rgba(255,255,255,0.5); }
 
+        /* Upsell banner */
         .plan-upsell {
-            margin-top: 18px;
-            padding: 14px 16px;
-            background: #FFF8F0;
-            border: 1.5px dashed #FDCB6E;
-            border-radius: var(--r-md);
-            text-align: center;
+            margin-top: 18px; padding: 14px 16px;
+            background: transparent; border: 2px solid var(--secondary);
+            border-radius: var(--r-md); text-align: center;
         }
         .plan-upsell-pct {
-            font-size: 13px; font-weight: 700; color: var(--cta);
-            display: flex; align-items: center; justify-content: center; gap: 5px;
-            margin-bottom: 5px;
+            font-size: 13px; font-weight: 700; color: var(--text);
+            display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 5px;
         }
-        .plan-upsell-text { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
-        .plan-upsell-arrow {
-            display: inline-flex; align-items: center; gap: 4px;
-            font-size: 12px; font-weight: 700; color: var(--primary);
-        }
-
-        .plan-pricing { background: var(--accent-bg); border-radius: var(--r-md); padding: 18px; text-align: center; margin-bottom: 22px; }
-        .plan-old  { font-size: 14px; color: #e05555; text-decoration: line-through; margin-bottom: 4px; }
-        .plan-new  { font-size: 46px; font-weight: 800; color: var(--text); line-height: 1; font-family: var(--font-head); }
-        .plan-unit { font-size: 13px; color: var(--muted); margin-top: 5px; }
-
-        /* Bloco de preço — só no Premium */
-        .plan-pricing-dark {
-            background: rgba(255,255,255,0.15);
-            border-radius: var(--r-md);
-            padding: 20px 18px;
-            text-align: center;
-            margin-bottom: 22px;
-        }
-        .plan-pricing-dark .plan-old {
-            font-size: 13px;
-            color: rgba(255,255,255,0.55);
-            text-decoration: line-through;
-            margin-bottom: 4px;
-        }
-        .plan-pricing-dark .plan-new {
-            font-size: 48px;
-            font-weight: 800;
-            color: #FFD93D;
-            line-height: 1;
-            font-family: var(--font-head);
-        }
-        .plan-pricing-dark .plan-unit {
-            font-size: 13px;
-            color: rgba(255,255,255,0.8);
-            margin-top: 6px;
-        }
-        .plan-savings {
-            font-size: 13px;
-            font-weight: 700;
-            color: #55efc4;
-            margin-top: 8px;
-        }
+        .plan-upsell-text { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+        .plan-upsell-arrow { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--secondary); }
 
         .garantia-box {
             max-width: 580px; margin: 0 auto; text-align: center;
@@ -855,74 +878,92 @@
         <div class="plans">
             <!-- BÁSICO -->
             <div class="plan-card plan-basic-card fade">
-                <div class="plan-name">Plano Básico</div>
-                <!-- imagem do produto -->
+                <div class="plan-title">Kit Básico</div>
                 <picture>
                     <source srcset="img/mockup.webp" type="image/webp">
                     <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Básico" loading="lazy" width="380" height="253">
                 </picture>
+                <div class="plan-price-old">De R$67,00</div>
+                <div class="plan-price-wrap">
+                    <div class="plan-price-display">
+                        <span class="plan-price-currency">R$</span>
+                        <span class="plan-price-main">19</span>
+                        <span class="plan-price-cents">,90</span>
+                    </div>
+                </div>
+                <div class="plan-price-unit">Pagamento único</div>
+                <div style="height:20px"></div>
+                <a href="https://pay.cakto.com.br/dwv47zf_868380" class="plan-cta-basic">Quero o kit básico</a>
                 <div class="plan-receives-label">Você recebe:</div>
                 <ul class="plan-includes">
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +110 Dinâmicas por situação de sessão</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Passo a passo em cada dinâmica</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Variação B (plano B) inclusa</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> PDF pronto pra imprimir</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Acesso imediato e vitalício</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +110 dinâmicas terapêuticas prontas</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Organizadas por situação de sessão</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Variação B em cada dinâmica</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Acesso imediato em PDF</li>
                 </ul>
-                <div class="plan-pricing">
-                    <div class="plan-old">De R$67,00</div>
-                    <div class="plan-new">R$17,90</div>
-                    <div class="plan-unit">pagamento único</div>
-                </div>
-                <a href="https://pay.cakto.com.br/dwv47zf_868380" class="cta-secondary cta-block">QUERO O BÁSICO →</a>
                 <div class="plan-upsell">
-                    <div class="plan-upsell-pct">
-                        <i data-lucide="trending-up" class="icon-sm"></i>
-                        93% escolhem o Premium
-                    </div>
-                    <div class="plan-upsell-text">+110 dinâmicas extras e 5 bônus exclusivos</div>
+                    <div class="plan-upsell-pct">92% escolhem o kit completo</div>
+                    <div class="plan-upsell-text">+220 dinâmicas e +5 bônus exclusivos</div>
                     <div class="plan-upsell-arrow">
-                        Ver Plano Premium <i data-lucide="arrow-down" class="icon-sm"></i>
+                        Ver kit completo <i data-lucide="arrow-down" class="icon-sm"></i>
                     </div>
                 </div>
             </div>
-            <!-- PREMIUM -->
+            <!-- COMPLETO -->
             <div class="plan-card plan-premium-card">
-                <div class="plan-badge">
-                    <i data-lucide="award" class="icon-sm icon-white"></i>
-                    MAIS ESCOLHIDO
+                <div style="text-align:center;margin-bottom:18px">
+                    <span class="plan-badge-top">+220 Dinâmicas Incluídas</span>
                 </div>
-                <div class="plan-name">Plano Premium</div>
-                <p class="plan-sub">Tudo que você precisa para nunca mais improvisar uma sessão.</p>
-                <!-- imagem da hero -->
                 <picture>
                     <source srcset="img/mockup.webp" type="image/webp">
-                    <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Premium — Kit Completo" loading="lazy" width="380" height="253">
+                    <img src="img/mockuop FK sem fundo.png" class="plan-img" alt="FonoKids Kit Completo" loading="lazy" width="380" height="253">
                 </picture>
+                <p class="plan-sub">O kit completo para transformar suas sessões</p>
+                <div class="plan-price-old">De R$197,00</div>
+                <div class="plan-price-wrap">
+                    <div class="plan-price-display">
+                        <span class="plan-price-currency">R$</span>
+                        <span class="plan-price-main">37</span>
+                        <span class="plan-price-cents">,90</span>
+                    </div>
+                </div>
+                <div class="plan-price-installment">Ou 6x de R$6,90</div>
+                <div class="plan-price-unit">pagamento único • acesso imediato</div>
+                <div class="plan-price-savings">Você economiza R$159,00</div>
+                <a href="https://pay.cakto.com.br/denkxx2" class="plan-cta-premium">Quero o kit completo</a>
                 <div class="plan-receives-label">Você recebe:</div>
                 <ul class="plan-includes">
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +220 Dinâmicas por situação de sessão</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Passo a passo em cada dinâmica</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Variação B (plano B) inclusa</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> PDF pronto pra imprimir</li>
-                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Acesso imediato e vitalício</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> +220 dinâmicas terapêuticas prontas</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Organizadas por situação de sessão</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Variação B em cada dinâmica</li>
+                    <li><i data-lucide="check-circle" class="icon-sm icon-success"></i> Acesso imediato em PDF</li>
                 </ul>
-                <div class="plan-bonus-title">+ BÔNUS EXCLUSIVOS</div>
+                <div class="plan-bonus-title">+ Bônus Exclusivos</div>
                 <ul class="plan-bonus-items">
-                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Kit Primeira Sessão Sem Choro</span><s>R$27</s></li>
-                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Roteiro de Devolutiva Para os Pais</span><s>R$19</s></li>
-                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> 15 Atividades Pra Casa</span><s>R$23</s></li>
-                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Fichas de Evolução Visual</span><s>R$17</s></li>
-                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Certificados e Selos de Conquista</span><s>R$15</s></li>
+                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Kit Primeira Sessão Sem Choro</span><s>R$27,00</s></li>
+                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Roteiro de Devolutiva Para Pais</span><s>R$19,00</s></li>
+                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> 15 Atividades Pra Casa</span><s>R$23,00</s></li>
+                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Fichas de Evolução Visual</span><s>R$17,00</s></li>
+                    <li><span><i data-lucide="gift" class="icon-sm icon-primary"></i> Certificados e Selos de Conquista</span><s>R$15,00</s></li>
                 </ul>
-                <div class="plan-bonus-total">Bônus no valor de <s>R$101,00</s> — incluídos gratuitamente</div>
-                <div class="plan-pricing plan-pricing-dark">
-                    <div class="plan-old">de R$197,00 por:</div>
-                    <div class="plan-new">R$37,90</div>
-                    <div class="plan-unit">ou 6x de R$ 7,45 no cartão</div>
-                    <div class="plan-savings">• Você recebe R$101,00 em bônus gratuitamente</div>
+                <div class="plan-payment-bar">
+                    <div class="plan-payment-item">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                        Cartão de crédito
+                    </div>
+                    <div class="plan-payment-item">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><line x1="21" y1="14" x2="21" y2="17"/><line x1="18" y1="17" x2="21" y2="17"/><line x1="18" y1="21" x2="21" y2="21"/></svg>
+                        Pix
+                    </div>
+                    <div class="plan-payment-item">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+                        Boleto
+                    </div>
+                    <div class="plan-payment-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                        Compra 100% segura
+                    </div>
                 </div>
-                <a href="https://pay.cakto.com.br/denkxx2" class="cta-primary cta-block">QUERO O PREMIUM COMPLETO →</a>
             </div>
         </div>
         <div class="garantia-box fade">
