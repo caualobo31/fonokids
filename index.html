@@ -1243,34 +1243,6 @@
     });
 
     document.querySelectorAll('.fade').forEach(el => io.observe(el));
-
-    // --- UPSELL MODAL ---
-    (function(){
-      var BASIC_URL    = 'https://ggcheckout.app/checkout/v5/PT2DzUBtCwScJqrrG4Ce';
-      var PREMIUM_URL  = 'https://ggcheckout.app/checkout/v5/kGE2S23axRt6NDpzpn23';
-      var overlay = document.getElementById('upsellModal');
-      var modalCtaPremium = document.getElementById('modalCtaPremium');
-      var modalCtaBasic   = document.getElementById('modalCtaBasic');
-      var modalClose      = document.getElementById('modalClose');
-
-      function openModal(e){ e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
-      function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; if(dest) window.location.href=dest; }
-
-      // Intercept all basic plan CTAs
-      document.querySelectorAll('.plan-cta-basic').forEach(function(btn){
-        btn.addEventListener('click', openModal);
-      });
-
-      modalCtaPremium.addEventListener('click', function(e){ e.preventDefault(); closeModal(PREMIUM_URL); });
-      modalCtaBasic.addEventListener('click',   function(){ closeModal(BASIC_URL); });
-      modalClose.addEventListener('click',      function(){ closeModal(BASIC_URL); });
-
-      // Click outside modal closes it
-      overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(BASIC_URL); });
-
-      // Escape key
-      document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(BASIC_URL); });
-    })();
 </script>
 
 <!-- UPSELL MODAL -->
@@ -1295,6 +1267,24 @@
     <button class="modal-cta-secondary" id="modalCtaBasic">Não, quero apenas o kit básico</button>
   </div>
 </div>
+<script>
+  (function(){
+    var BASIC_URL   = 'https://ggcheckout.app/checkout/v5/PT2DzUBtCwScJqrrG4Ce';
+    var PREMIUM_URL = 'https://ggcheckout.app/checkout/v5/kGE2S23axRt6NDpzpn23';
+    var overlay         = document.getElementById('upsellModal');
+    var modalCtaPremium = document.getElementById('modalCtaPremium');
+    var modalCtaBasic   = document.getElementById('modalCtaBasic');
+    var modalClose      = document.getElementById('modalClose');
+    function openModal(e){ e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; if(dest) window.location.href=dest; }
+    document.querySelectorAll('.plan-cta-basic').forEach(function(btn){ btn.addEventListener('click', openModal); });
+    modalCtaPremium.addEventListener('click', function(e){ e.preventDefault(); closeModal(PREMIUM_URL); });
+    modalCtaBasic.addEventListener('click',   function(){ closeModal(BASIC_URL); });
+    modalClose.addEventListener('click',      function(){ closeModal(BASIC_URL); });
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(BASIC_URL); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(BASIC_URL); });
+  })();
+</script>
 
 <script>
   window.pixelId = "69f2e31c9020ad05b3010e1a";
