@@ -1275,13 +1275,14 @@
     var modalCtaPremium = document.getElementById('modalCtaPremium');
     var modalCtaBasic   = document.getElementById('modalCtaBasic');
     var modalClose      = document.getElementById('modalClose');
-    function openModal(e){ e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
-    function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; if(dest) window.location.href=dest; }
+    var overlayReady = false;
+    function openModal(e){ e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; overlayReady=false; setTimeout(function(){ overlayReady=true; },400); }
+    function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; overlayReady=false; if(dest) window.location.href=dest; }
     document.querySelectorAll('.plan-cta-basic').forEach(function(btn){ btn.addEventListener('click', openModal); });
     modalCtaPremium.addEventListener('click', function(e){ e.preventDefault(); closeModal(PREMIUM_URL); });
     modalCtaBasic.addEventListener('click',   function(){ closeModal(BASIC_URL); });
     modalClose.addEventListener('click',      function(){ closeModal(BASIC_URL); });
-    overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(BASIC_URL); });
+    overlay.addEventListener('click', function(e){ if(overlayReady && e.target===overlay) closeModal(BASIC_URL); });
     document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(BASIC_URL); });
   })();
 </script>
