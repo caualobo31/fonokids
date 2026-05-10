@@ -643,6 +643,104 @@
         .footer-logo    { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 12px; }
         .footer-divider { width: 36px; height: 2px; background: var(--primary); margin: 12px auto 16px; }
         .footer-text    { font-size: 13px; color: #7f8c9a; line-height: 1.9; max-width: 520px; margin: 0 auto; }
+
+        /* --- UPSELL MODAL --- */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000;
+            padding: 16px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-box {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 32px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            position: relative;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        .modal-overlay.open .modal-box { transform: scale(1); }
+        @media (max-width: 540px) { .modal-box { padding: 32px 20px; } }
+        .modal-close {
+            position: absolute; top: 16px; right: 16px;
+            background: none; border: none;
+            cursor: pointer; color: #B2BEC3;
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 50%;
+            transition: color 0.15s, background 0.15s;
+        }
+        .modal-close:hover { color: var(--text); background: #F0EFFF; }
+        .modal-badge {
+            display: inline-block;
+            background: #FDCB6E; color: #2D3436;
+            font-family: var(--font-body); font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 5px 14px; border-radius: 50px;
+            margin-bottom: 16px;
+        }
+        .modal-headline {
+            font-family: var(--font-head); font-weight: 800;
+            font-size: clamp(22px, 5vw, 32px);
+            color: var(--text); line-height: 1.2;
+            margin-bottom: 14px;
+        }
+        .modal-desc {
+            font-size: 16px; color: var(--muted);
+            max-width: 420px; margin: 0 auto 22px;
+            line-height: 1.6;
+        }
+        .modal-price-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 20px; margin-bottom: 8px;
+        }
+        .modal-price-old {
+            font-size: 18px; font-weight: 700;
+            color: var(--cta);
+            text-decoration: line-through;
+        }
+        .modal-price-new {
+            display: inline-flex; align-items: flex-start; gap: 2px;
+            color: var(--primary);
+        }
+        .modal-price-currency { font-size: 16px; font-weight: 700; line-height: 1; padding-top: 4px; }
+        .modal-price-main    { font-size: 52px; font-weight: 800; line-height: 1; }
+        .modal-price-cents   { font-size: 20px; font-weight: 700; line-height: 1; padding-top: 10px; }
+        .modal-price-unit {
+            font-size: 13px; color: var(--muted);
+            margin-bottom: 24px;
+        }
+        .modal-cta-primary {
+            display: block; width: 100%;
+            background: var(--primary); color: #fff;
+            font-family: var(--font-body); font-size: 17px; font-weight: 700;
+            border: none; border-radius: 50px;
+            height: 56px; cursor: pointer;
+            box-shadow: 0 4px 14px rgba(108,92,231,0.35);
+            transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+            text-decoration: none; line-height: 56px;
+            margin-bottom: 16px;
+        }
+        .modal-cta-primary:hover {
+            background: var(--primary-deep);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(108,92,231,0.45);
+        }
+        .modal-cta-secondary {
+            display: inline-block; font-size: 14px;
+            color: var(--muted); text-decoration: underline;
+            cursor: pointer; background: none; border: none;
+            font-family: var(--font-body);
+            transition: color 0.15s;
+        }
+        .modal-cta-secondary:hover { color: var(--text); }
     </style>
 </head>
 <body>
@@ -1145,7 +1243,58 @@
     });
 
     document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+    // --- UPSELL MODAL ---
+    (function(){
+      var BASIC_URL    = 'https://ggcheckout.app/checkout/v5/PT2DzUBtCwScJqrrG4Ce';
+      var PREMIUM_URL  = '#checkout-premium-desconto'; // substituir pelo link real
+      var overlay = document.getElementById('upsellModal');
+      var modalCtaPremium = document.getElementById('modalCtaPremium');
+      var modalCtaBasic   = document.getElementById('modalCtaBasic');
+      var modalClose      = document.getElementById('modalClose');
+
+      function openModal(e){ e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+      function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; if(dest) window.location.href=dest; }
+
+      // Intercept all basic plan CTAs
+      document.querySelectorAll('.plan-cta-basic').forEach(function(btn){
+        btn.addEventListener('click', openModal);
+      });
+
+      modalCtaPremium.addEventListener('click', function(e){ e.preventDefault(); closeModal(PREMIUM_URL); });
+      modalCtaBasic.addEventListener('click',   function(){ closeModal(BASIC_URL); });
+      modalClose.addEventListener('click',      function(){ closeModal(BASIC_URL); });
+
+      // Click outside modal closes it
+      overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(BASIC_URL); });
+
+      // Escape key
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(BASIC_URL); });
+    })();
 </script>
+
+<!-- UPSELL MODAL -->
+<div class="modal-overlay" id="upsellModal" role="dialog" aria-modal="true" aria-labelledby="modalHeadline">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <span class="modal-badge">Oferta Especial</span>
+    <h2 class="modal-headline" id="modalHeadline">Espera! Temos uma oferta exclusiva pra você</h2>
+    <p class="modal-desc">Aproveite e leve o Kit Completo com os 5 bônus exclusivos por um preço especial. São mais de R$101 em materiais extras por muito menos do que você imagina.</p>
+    <div class="modal-price-row">
+      <span class="modal-price-old">R$37,90</span>
+      <div class="modal-price-new">
+        <span class="modal-price-currency">R$</span>
+        <span class="modal-price-main">29</span>
+        <span class="modal-price-cents">,90</span>
+      </div>
+    </div>
+    <p class="modal-price-unit">Pagamento único. Acesso imediato.</p>
+    <a href="#checkout-premium-desconto" class="modal-cta-primary" id="modalCtaPremium">Quero o kit completo com desconto</a>
+    <button class="modal-cta-secondary" id="modalCtaBasic">Não, quero apenas o kit básico</button>
+  </div>
+</div>
 
 <script>
   window.pixelId = "69f2e31c9020ad05b3010e1a";
