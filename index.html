@@ -621,9 +621,8 @@
         .carousel-wrap::after  { right: 0; background: linear-gradient(to left,  #fff 30%, transparent); }
         .carousel-track {
             display: flex;
-            gap: 20px;
             width: max-content;
-            animation: dep-marquee 22s linear infinite;
+            animation: dep-marquee 28s linear infinite;
         }
         .carousel-track img {
             height: 420px;
@@ -634,10 +633,11 @@
             display: block;
             pointer-events: none;
             user-select: none;
+            margin-right: 20px;
         }
         @keyframes dep-marquee {
             from { transform: translateX(0); }
-            to   { transform: translateX(-33.333%); }
+            to   { transform: translateX(-25%); }
         }
         @media (prefers-reduced-motion: reduce) { .carousel-track { animation: none; } }
 
@@ -1112,15 +1112,18 @@
     </div>
     <div class="carousel-wrap">
         <div class="carousel-track">
-            <img src="img/dep%201%20CL.jpg" alt="Depoimento de cliente FonoKids" loading="lazy">
-            <img src="img/dep%202%20CL.jpg" alt="Depoimento de cliente FonoKids" loading="lazy">
-            <img src="img/dep%203%20CL.jpg" alt="Depoimento de cliente FonoKids" loading="lazy">
-            <img src="img/dep%201%20CL.jpg" alt="" loading="lazy" aria-hidden="true">
-            <img src="img/dep%202%20CL.jpg" alt="" loading="lazy" aria-hidden="true">
-            <img src="img/dep%203%20CL.jpg" alt="" loading="lazy" aria-hidden="true">
-            <img src="img/dep%201%20CL.jpg" alt="" loading="lazy" aria-hidden="true">
-            <img src="img/dep%202%20CL.jpg" alt="" loading="lazy" aria-hidden="true">
-            <img src="img/dep%203%20CL.jpg" alt="" loading="lazy" aria-hidden="true">
+            <img src="img/dep%201%20CL.jpg" alt="Depoimento de cliente FonoKids">
+            <img src="img/dep%202%20CL.jpg" alt="Depoimento de cliente FonoKids">
+            <img src="img/dep%203%20CL.jpg" alt="Depoimento de cliente FonoKids">
+            <img src="img/dep%201%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%202%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%203%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%201%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%202%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%203%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%201%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%202%20CL.jpg" alt="" aria-hidden="true">
+            <img src="img/dep%203%20CL.jpg" alt="" aria-hidden="true">
         </div>
     </div>
 </section>
