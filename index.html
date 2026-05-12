@@ -600,18 +600,46 @@
         .garantia-text { font-size: 15px; line-height: 1.7; color: var(--muted); }
 
         /* =======================================
-           BLOCO 8 — DEPOIMENTOS
+           BLOCO 8 — DEPOIMENTOS (carrossel)
         ======================================= */
         #depoimentos { background: #fff; }
-        .testimonials { display: grid; grid-template-columns: 1fr; gap: 22px; }
-        @media (min-width: 768px) { .testimonials { grid-template-columns: repeat(3, 1fr); } }
-        .t-card { background: #FAFAFE; border: 1px solid rgba(108,92,231,0.08); border-radius: var(--r-lg); padding: 26px; box-shadow: var(--shadow-card); }
-        .t-stars { display: flex; gap: 3px; margin-bottom: 14px; }
-        .t-text  { font-size: 15px; font-style: italic; color: var(--text); line-height: 1.75; margin-bottom: 18px; }
-        .t-author { display: flex; align-items: center; gap: 12px; }
-        .t-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #a29bfe); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0; }
-        .t-name { font-weight: 700; font-size: 14px; color: var(--text); }
-        .t-role { font-size: 13px; color: var(--muted); }
+        .carousel-wrap {
+            overflow: hidden;
+            position: relative;
+            padding: 8px 0;
+        }
+        .carousel-wrap::before,
+        .carousel-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .carousel-wrap::before { left: 0; background: linear-gradient(to right, #fff 30%, transparent); }
+        .carousel-wrap::after  { right: 0; background: linear-gradient(to left,  #fff 30%, transparent); }
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: dep-marquee 22s linear infinite;
+        }
+        .carousel-track img {
+            height: 420px;
+            width: auto;
+            border-radius: 16px;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+            flex-shrink: 0;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+        }
+        @keyframes dep-marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-33.333%); }
+        }
+        @media (prefers-reduced-motion: reduce) { .carousel-track { animation: none; } }
 
         /* =======================================
            BLOCO 9 — SEGUNDO CTA
@@ -1076,33 +1104,23 @@
 </section>
 
 <!-- ==================== DEPOIMENTOS ==================== -->
-<section id="depoimentos" class="section">
+<section id="depoimentos" class="section" style="padding-bottom:0">
     <div class="container">
         <div class="section-center fade" style="margin-bottom:44px">
             <h2 class="sec-headline">Fonoaudiólogas que <span class="kw">já usam o FonoKids</span></h2>
         </div>
-        <div class="testimonials">
-            <div class="t-card fade">
-                <div class="t-stars">
-                    <i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i>
-                </div>
-                <p class="t-text">"Eu passava horas do meu domingo criando material pra semana. Desde que comecei a usar o FonoKids, abro o PDF, escolho a dinâmica certa pra situação e já entro na sessão. Minha produtividade dobrou e as crianças estão muito mais engajadas."</p>
-                <div class="t-author"><div class="t-avatar">A</div><div><div class="t-name">Ana Paula Ferreira</div><div class="t-role">Fonoaudióloga — SP</div></div></div>
-            </div>
-            <div class="t-card fade">
-                <div class="t-stars">
-                    <i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i>
-                </div>
-                <p class="t-text">"Tinha uma paciente de 5 anos que travava sempre que eu propunha exercício de articulação. Usei a dinâmica do Detetive dos Sons na mesma semana que comprei. Ela pediu pra repetir no final. Chorei de emoção. Vale cada centavo."</p>
-                <div class="t-author"><div class="t-avatar">C</div><div><div class="t-name">Camila Rodrigues</div><div class="t-role">Fonoaudióloga — RJ</div></div></div>
-            </div>
-            <div class="t-card fade">
-                <div class="t-stars">
-                    <i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i><i data-lucide="star" class="icon-sm star-icon"></i>
-                </div>
-                <p class="t-text">"O que me surpreendeu foi a organização por situação de sessão. Não é mais 'qual área vou trabalhar hoje?' — é 'o que tá acontecendo agora com essa criança?' Isso muda tudo. Recomendo pra toda colega que atende crianças."</p>
-                <div class="t-author"><div class="t-avatar">J</div><div><div class="t-name">Juliana Monteiro</div><div class="t-role">Fonoaudióloga — MG</div></div></div>
-            </div>
+    </div>
+    <div class="carousel-wrap">
+        <div class="carousel-track">
+            <img src="img/dep 1 CL.jpg" alt="Depoimento de cliente FonoKids" loading="lazy">
+            <img src="img/dep 2 CL.jpg" alt="Depoimento de cliente FonoKids" loading="lazy">
+            <img src="img/dep 3 CL.jpg" alt="Depoimento de cliente FonoKids" loading="lazy">
+            <img src="img/dep 1 CL.jpg" alt="" loading="lazy" aria-hidden="true">
+            <img src="img/dep 2 CL.jpg" alt="" loading="lazy" aria-hidden="true">
+            <img src="img/dep 3 CL.jpg" alt="" loading="lazy" aria-hidden="true">
+            <img src="img/dep 1 CL.jpg" alt="" loading="lazy" aria-hidden="true">
+            <img src="img/dep 2 CL.jpg" alt="" loading="lazy" aria-hidden="true">
+            <img src="img/dep 3 CL.jpg" alt="" loading="lazy" aria-hidden="true">
         </div>
     </div>
 </section>
@@ -1236,7 +1254,7 @@
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
 
-    const staggerSels = ['.pain-grid', '.org-grid', '.testimonials', '.bonus-list', '.plans'];
+    const staggerSels = ['.pain-grid', '.org-grid', '.bonus-list', '.plans'];
     staggerSels.forEach(sel => {
         const p = document.querySelector(sel);
         if (!p) return;
