@@ -411,6 +411,21 @@
         .oferta-header { text-align: center; margin-bottom: 52px; }
         .oferta-header .sec-sub { margin: 0 auto; }
 
+        /* Countdown banner */
+        .countdown-banner {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #FEF3C7; color: #92400E;
+            font-family: var(--font-body); font-size: 14px; font-weight: 700;
+            letter-spacing: 0.07em; text-transform: uppercase;
+            padding: 10px 24px; border-radius: 100px;
+            margin-bottom: 28px;
+            border: 1.5px solid #FCD34D;
+        }
+        .countdown-banner .countdown-time {
+            font-family: var(--font-head); font-size: 16px; font-weight: 800;
+            color: #78350F; letter-spacing: 0.05em;
+        }
+
         .plans {
             display: grid;
             grid-template-columns: 1fr;
@@ -1036,7 +1051,10 @@
 <section id="oferta" class="section">
     <div class="container">
         <div class="oferta-header fade">
-            <h2 class="sec-headline">Escolha seu plano e <span class="kw-ul">comece hoje</span></h2>
+            <div class="countdown-banner">
+                ⏳ As ofertas encerram em breve — <span class="countdown-time" id="offerCountdown">10:00</span>
+            </div>
+            <h2 class="sec-headline">Escolha seu KIT e <span class="kw-ul">comece hoje</span></h2>
             <p class="sec-sub" style="margin:0 auto">Acesso imediato. Baixe, imprima e use na próxima sessão.</p>
         </div>
         <div class="plans">
@@ -1324,6 +1342,25 @@
 </script>
 
 <script>
+  // Countdown timer
+  (function(){
+    var KEY = 'fk_offer_end';
+    var DURATION = 10 * 60 * 1000; // 10 minutos
+    var endTime = sessionStorage.getItem(KEY);
+    if (!endTime) { endTime = Date.now() + DURATION; sessionStorage.setItem(KEY, endTime); }
+    endTime = parseInt(endTime);
+    var el = document.getElementById('offerCountdown');
+    if (!el) return;
+    function tick() {
+      var rem = Math.max(0, endTime - Date.now());
+      if (rem === 0) { endTime = Date.now() + DURATION; sessionStorage.setItem(KEY, endTime); rem = DURATION; }
+      var m = Math.floor(rem / 60000);
+      var s = Math.floor((rem % 60000) / 1000);
+      el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    tick(); setInterval(tick, 1000);
+  })();
+
   window.pixelId = "69f2e31c9020ad05b3010e1a";
   var a = document.createElement("script");
   a.setAttribute("async", "");
