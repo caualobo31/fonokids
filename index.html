@@ -1291,6 +1291,20 @@
     });
 
     document.querySelectorAll('.fade').forEach(el => io.observe(el));
+
+    // Passa parâmetros de URL para todos os redirects de checkout
+    function redirect(url) {
+        var s = window.location.search;
+        window.location.href = s ? url + (url.indexOf('?') >= 0 ? '&' + s.slice(1) : s) : url;
+    }
+
+    // Intercepta o botão do kit completo (plano premium)
+    document.querySelectorAll('.plan-cta-premium').forEach(function(el) {
+        el.addEventListener('click', function(e) {
+            e.preventDefault();
+            redirect('https://ggcheckout.app/checkout/v4/fbL2u4PSdAy4yqIAMi6C');
+        });
+    });
 </script>
 
 <!-- UPSELL MODAL -->
@@ -1325,7 +1339,7 @@
     var modalClose      = document.getElementById('modalClose');
     var overlayReady = false;
     function openModal(e){ e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; overlayReady=false; setTimeout(function(){ overlayReady=true; },400); }
-    function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; overlayReady=false; if(dest) window.location.href=dest; }
+    function closeModal(dest){ overlay.classList.remove('open'); document.body.style.overflow=''; overlayReady=false; if(dest) redirect(dest); }
     document.querySelectorAll('.plan-cta-basic').forEach(function(btn){ btn.addEventListener('click', openModal); });
     modalCtaPremium.addEventListener('click', function(e){ e.preventDefault(); closeModal(PREMIUM_URL); });
     modalCtaBasic.addEventListener('click',   function(){ closeModal(BASIC_URL); });
